@@ -5,6 +5,7 @@ using UnityEngine.Playables;
 
 public class SceneCoroutine : MonoBehaviour
 {
+    public GameObject fader;
     public GameObject olfy;
 
     public GameObject bean;

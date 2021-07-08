@@ -5,12 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/VR Rig.unity
-    guid: 4c45282a108766a40b541dedb05b95e0
   - enabled: 1
     path: Assets/Scenes/Olfy.unity
     guid: d6de331181670ab43af877d59a48c564
