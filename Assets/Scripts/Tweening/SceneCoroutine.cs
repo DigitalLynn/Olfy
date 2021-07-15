@@ -5,6 +5,8 @@ using UnityEngine.Playables;
 
 public class SceneCoroutine : MonoBehaviour
 {
+    public GameObject VRRig;
+
     public GameObject fader;
     public GameObject olfy;
 
@@ -24,9 +26,32 @@ public class SceneCoroutine : MonoBehaviour
 
     IEnumerator Begin()
     {
+        // Start of the scene
+        yield return new WaitForSecondsRealtime(2);
+
+        fader.GetComponent<HMDFader>().FadeIn(2);
+        Debug.Log("Fade in");
+        yield return new WaitForSecondsRealtime(2);
+
+
+        // Change to 23 seconds when Pris comes up with the full scene
+        yield return new WaitForSecondsRealtime(2);
+
+        fader.GetComponent<HMDFader>().FadeOut(2);
+        Debug.Log("Fade out");
+        yield return new WaitForSecondsRealtime(2);
+
+
+        yield return new WaitForSecondsRealtime(1);
+
+        VRRig.transform.position = new Vector3(0, 0, 0);
+        Debug.Log("Teleport");
+
         //
         // ACT 1
         //
+
+        fader.GetComponent<HMDFader>().FadeIn(2);
 
         // Olfy triggers the GRASS smell
         olfy.GetComponent<Channel1>().duration = 2000;
@@ -130,5 +155,7 @@ public class SceneCoroutine : MonoBehaviour
         //
 
         // To be animated later
+
+        fader.GetComponent<HMDFader>().FadeOut(2);
     }
 }
