@@ -17238,7 +17238,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049212680}
   m_LocalRotation: {x: 0, y: -0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 0.82, y: 0, z: 3}
+  m_LocalPosition: {x: 0.82, y: 0, z: 3.25}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 908329147}
@@ -32146,7 +32146,7 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
-  - name: Giggle
+  - name: Giggle1
     clip: {fileID: 8300000, guid: e16aef3d58ed2d347a9394c6357c0da8, type: 3}
     volume: 1
     volumeVariance: 0
@@ -32164,7 +32164,7 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: 0}
     source: {fileID: 0}
-  - name: Giggle
+  - name: Giggle2
     clip: {fileID: 8300000, guid: daa2103e79b4d174d9486607cfc4c0db, type: 3}
     volume: 1
     volumeVariance: 0
@@ -32469,7 +32469,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103309324}
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 1.5, y: 0, z: 3}
+  m_LocalPosition: {x: 2, y: 0, z: 3}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 908329147}
