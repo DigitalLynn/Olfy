@@ -25,8 +25,6 @@ public class MoveBean : MonoBehaviour
 
     // Setting the duration and rotation times for the tweening
     
-    private int durationPos = 3;
-    private int durationRot = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -49,40 +47,28 @@ public class MoveBean : MonoBehaviour
     /// </summary>
 
     // Move bean from their current location
-    public void BeanToHouse()
+    public void BeanToHouse(float durationPos, float durationRot)
     {
         transform.DOMove(housePos, durationPos);
         transform.DORotateQuaternion(houseRot, durationRot);
     }
 
     // Move bean from their current location to investigation one (where the orb used to be)
-    public void BeanToInvest2_Quick()
-    {
-        transform.DOMove(investigate2Pos, durationRot);
-        transform.DORotateQuaternion(investigate2Rot, durationRot);
-    }
-
-    public void BeanToInvest2_Slow()
+    public void BeanToInvest2(float durationPos, float durationRot)
     {
         transform.DOMove(investigate2Pos, durationPos);
         transform.DORotateQuaternion(investigate2Rot, durationRot);
     }
 
     // Move bean from their current location to investigation two (where the rock used to be)
-    public void BeanToInvest1_Quick()
-    {
-        transform.DOMove(investigate1Pos, durationRot);
-        transform.DORotateQuaternion(investigate1Rot, durationRot);
-    }
-
-    public void BeanToInvest1_Slow()
+    public void BeanToInvest1(float durationPos, float durationRot)
     {
         transform.DOMove(investigate1Pos, durationPos);
         transform.DORotateQuaternion(investigate1Rot, durationRot);
     }
 
     // Move bean from their current location to where Sprout is hiding (where the rock used to be)
-    public void BeanToSprout()
+    public void BeanToSprout(float durationPos, float durationRot)
     {
         transform.DOMove(grassPos, durationPos);
         transform.DORotateQuaternion(grassRot, durationRot);

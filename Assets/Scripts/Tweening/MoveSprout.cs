@@ -27,8 +27,6 @@ public class MoveSprout : MonoBehaviour
     private int durationPos = 3;
     private int durationRot = 1;
 
-    // What scene are the current actors at
-    private int sceneNumber = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -48,30 +46,19 @@ public class MoveSprout : MonoBehaviour
         transform.DORotateQuaternion(startRot, durationRot);
     }
 
-    public void SproutToInvest1_Quick()
-    {
-        transform.DOMove(investigate1Pos, durationRot);
-        transform.DORotateQuaternion(investigate1Rot, durationRot);
-    }
-
-    public void SproutToInvest1_Slow()
+    public void SproutToInvest1(float durationPos, float durationRot)
     {
         transform.DOMove(investigate1Pos, durationPos);
         transform.DORotateQuaternion(investigate1Rot, durationRot);
     }
 
-    public void SproutToInvest2_Quick()
-    {
-        transform.DOMove(investigate2Pos, durationRot);
-        transform.DORotateQuaternion(investigate2Rot, durationRot);
-    }
-    public void SproutToInvest2_Slow()
+    public void SproutToInvest2(float durationPos, float durationRot)
     {
         transform.DOMove(investigate2Pos, durationPos);
         transform.DORotateQuaternion(investigate2Rot, durationRot);
     }
 
-    public void SproutToHouse()
+    public void SproutToHouse(float durationPos, float durationRot)
     {
         transform.DOMove(housePos, durationPos);
         transform.DORotateQuaternion(houseRot, durationRot);

@@ -7,18 +7,12 @@ public class Channel1 : MonoBehaviour
 {
     public string adress = "10.1.1.163"; // Priscilla's home IP address
 
-    public int duration = 3000; // Duration in milliseconds
-
-    private int channel = 1; // Chooses which perfume bottle the scent will come out
-
-    public int intensity = 15; // How intense is it on a scale of 0 - 100
-
     private void Start()
     {
         //ActiveSmell(); // Exemple d'appel du délenchement de l'odeur
     }
 
-    public void ActiveSmell()
+    public void ActiveSmell(int intensity, int duration, int channel)
     {
         Debug.Log($"activated, Intensity: {intensity}, Channel: {channel}, Duration: {duration}");
 

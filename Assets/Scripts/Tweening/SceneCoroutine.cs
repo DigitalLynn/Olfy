@@ -5,6 +5,12 @@ using UnityEngine.Playables;
 
 public class SceneCoroutine : MonoBehaviour
 {
+    
+    public GameObject beanUI1;
+    public GameObject beanUI2;
+    public GameObject sproutUI1;
+    public GameObject sproutUI2;
+
     public GameObject VRRig;
 
     public GameObject fader;
@@ -17,8 +23,6 @@ public class SceneCoroutine : MonoBehaviour
     public GameObject grassIn1;
     public GameObject grassIn2;
 
-    public int pause = 5;
-
     public void Start()
     {
         StartCoroutine(Begin());
@@ -30,15 +34,13 @@ public class SceneCoroutine : MonoBehaviour
         yield return new WaitForSecondsRealtime(2);
 
         fader.GetComponent<HMDFader>().FadeIn(2);
-        Debug.Log("Fade in");
+        
         yield return new WaitForSecondsRealtime(2);
 
-
-        // Change to 23 seconds when Pris comes up with the full scene
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSecondsRealtime(15);
 
         fader.GetComponent<HMDFader>().FadeOut(2);
-        Debug.Log("Fade out");
+
         yield return new WaitForSecondsRealtime(2);
 
 
@@ -54,65 +56,102 @@ public class SceneCoroutine : MonoBehaviour
         fader.GetComponent<HMDFader>().FadeIn(2);
 
         // Olfy triggers the GRASS smell
-        olfy.GetComponent<Channel1>().duration = 2000;
-        olfy.GetComponent<Channel1>().intensity = 60;
-        olfy.GetComponent<Channel1>().ActiveSmell();
+        // Intensity, duration, channel
+        olfy.GetComponent<Channel1>().ActiveSmell(60, 2000, 1);
 
         // Bean is waiting out the front of her house
-        yield return new WaitForSecondsRealtime(7);
+        yield return new WaitForSecondsRealtime(6);
+        // 28" here
+        FindObjectOfType<AudioManager>().Play("Thought");
+        beanUI1.GetComponent<ThoughtTween>().UIAppear();
+        yield return new WaitForSecondsRealtime(4);
 
         // Play sound for thought bubble
-        FindObjectOfType<AudioManager>().Play("Thought");
+        FindObjectOfType<AudioManager>().Play("Stomach");
+        beanUI1.GetComponent<ThoughtTween>().ChangeImage();
 
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSecondsRealtime(4);
 
         // Play sound for stomach growl
-        FindObjectOfType<AudioManager>().Play("Stomach");
+        FindObjectOfType<AudioManager>().Play("Thought");
+        beanUI1.GetComponent<ThoughtTween>().ChangeImage();
+
+        yield return new WaitForSecondsRealtime(4);
+
+        beanUI1.GetComponent<ThoughtTween>().UIDisappear();
 
         // Bean is waiting out the front of her house
-        yield return new WaitForSecondsRealtime(8);
+        yield return new WaitForSecondsRealtime(1);
 
         // Bean goes to the first tuft of grass
-        bean.GetComponent<MoveBean>().BeanToInvest2_Slow();
+        bean.GetComponent<MoveBean>().BeanToInvest2(2, 1);
         grassIn2.GetComponent<GrassPassOnScript>().GrassDown();
 
         // Olfy triggers the BERRY smell
-        olfy.GetComponent<Channel3>().duration = 2000;
-        olfy.GetComponent<Channel3>().intensity = 60;
-        olfy.GetComponent<Channel3>().ActiveSmell();
+        olfy.GetComponent<Channel1>().ActiveSmell(60, 2000, 3);
 
-
-
-        yield return new WaitForSecondsRealtime(pause);
+        yield return new WaitForSecondsRealtime(5);
 
         // Bean goes to the second tuft of grass
-        bean.GetComponent<MoveBean>().BeanToInvest1_Quick();
+        bean.GetComponent<MoveBean>().BeanToInvest1(1, 1);
         grassIn2.GetComponent<GrassPassOnScript>().GrassUp();
         grassIn1.GetComponent<GrassPassOnScript>().GrassDown();
 
         // Olfy triggers the DISAPPOINTMENT smell
-        olfy.GetComponent<Channel2>().duration = 2000;
-        olfy.GetComponent<Channel2>().intensity = 60;
-        olfy.GetComponent<Channel2>().ActiveSmell();
+        olfy.GetComponent<Channel1>().ActiveSmell(60, 2000, 2);
 
+        beanUI1.GetComponent<ThoughtTween>().ChangeImage();
+        
 
-        yield return new WaitForSecondsRealtime(pause);
+        yield return new WaitForSecondsRealtime(5);
 
         // Bean goes to the third tuft of grass with Sprout hiding behind it
-        bean.GetComponent<MoveBean>().BeanToSprout();
+        bean.GetComponent<MoveBean>().BeanToSprout(3, 1);
         grassIn1.GetComponent<GrassPassOnScript>().GrassUp();
         grassSprout.GetComponent<GrassPassOnScript>().GrassDown();
 
         // Olfy triggers the GRASS smell
-        olfy.GetComponent<Channel1>().duration = 2000;
-        olfy.GetComponent<Channel1>().intensity = 80;
-        olfy.GetComponent<Channel1>().ActiveSmell();
+        olfy.GetComponent<Channel1>().ActiveSmell(80, 2000, 1);
 
         //
         // ACT 2
         //
 
-        yield return new WaitForSecondsRealtime(10);
+        yield return new WaitForSecondsRealtime(4);
+
+        beanUI2.GetComponent<ThoughtTween>().UIAppear();
+
+        yield return new WaitForSecondsRealtime(2);
+
+        sproutUI1.GetComponent<ThoughtTween>().UIAppear();
+
+        yield return new WaitForSecondsRealtime(2);
+
+        beanUI2.GetComponent<ThoughtTween>().ChangeImage();
+
+        yield return new WaitForSecondsRealtime(2);
+
+        sproutUI1.GetComponent<ThoughtTween>().ChangeImage();
+
+        yield return new WaitForSecondsRealtime(2);
+
+        beanUI2.GetComponent<ThoughtTween>().ChangeImage();
+
+        yield return new WaitForSecondsRealtime(2);
+
+        sproutUI1.GetComponent<ThoughtTween>().ChangeImage();
+
+        yield return new WaitForSecondsRealtime(2);
+
+        beanUI2.GetComponent<ThoughtTween>().UIDisappear();
+
+        yield return new WaitForSecondsRealtime(2);
+
+        sproutUI1.GetComponent<ThoughtTween>().UIDisappear();
+
+        yield return new WaitForSecondsRealtime(2);
+
+        // I had ten seconds in act 2, fix timeline when done
 
         //
         // I put in a ten second pause
@@ -120,34 +159,29 @@ public class SceneCoroutine : MonoBehaviour
         //
 
         // Olfy triggers the BERRY smell
-        olfy.GetComponent<Channel3>().duration = 2000;
-        olfy.GetComponent<Channel3>().intensity = 80;
-        olfy.GetComponent<Channel3>().ActiveSmell();
-
-       
-
-        yield return new WaitForSecondsRealtime(pause);
+        olfy.GetComponent<Channel1>().ActiveSmell(80, 2000, 3);
 
         // Bean and Sprout goes to the second tuft of grass with Sprout
-        bean.GetComponent<MoveBean>().BeanToInvest1_Slow();
-        sprout.GetComponent<MoveSprout>().SproutToInvest1_Slow();
+        bean.GetComponent<MoveBean>().BeanToInvest1(4, 1);
         grassIn1.GetComponent<GrassPassOnScript>().GrassDown();
 
+        yield return new WaitForSecondsRealtime(0.5f);
 
+        sprout.GetComponent<MoveSprout>().SproutToInvest1(3, 1);
 
-        yield return new WaitForSecondsRealtime(pause);
+        yield return new WaitForSecondsRealtime(6);
 
         // Bean goes to the first tuft of grass with Sprout
-        bean.GetComponent<MoveBean>().BeanToInvest2_Quick();
-        sprout.GetComponent<MoveSprout>().SproutToInvest2_Quick();
+        bean.GetComponent<MoveBean>().BeanToInvest2(1, 1);
+        sprout.GetComponent<MoveSprout>().SproutToInvest2(1, 1);
         grassIn2.GetComponent<GrassPassOnScript>().GrassDown();
         grassIn1.GetComponent<GrassPassOnScript>().GrassUp();
 
-        yield return new WaitForSecondsRealtime(pause);
+        yield return new WaitForSecondsRealtime(6);
 
         // Bean goes home with Sprout
-        bean.GetComponent<MoveBean>().BeanToHouse();
-        sprout.GetComponent<MoveSprout>().SproutToHouse();
+        bean.GetComponent<MoveBean>().BeanToHouse(3, 1);
+        sprout.GetComponent<MoveSprout>().SproutToHouse(3, 1);
         grassIn2.GetComponent<GrassPassOnScript>().GrassUp();
 
         //
@@ -155,6 +189,33 @@ public class SceneCoroutine : MonoBehaviour
         //
 
         // To be animated later
+
+        yield return new WaitForSecondsRealtime(4);
+
+        beanUI1.GetComponent<ThoughtTween>().UIAppear();
+
+        yield return new WaitForSecondsRealtime(3);
+
+        beanUI1.GetComponent<ThoughtTween>().ChangeImage();
+
+        yield return new WaitForSecondsRealtime(2);
+
+        beanUI1.GetComponent<ThoughtTween>().UIDisappear();
+        sproutUI2.GetComponent<ThoughtTween>().UIAppear();
+
+        yield return new WaitForSecondsRealtime(3);
+
+        sproutUI2.GetComponent<ThoughtTween>().ChangeImage();
+        beanUI1.GetComponent<ThoughtTween>().ChangeImage();
+
+        yield return new WaitForSecondsRealtime(2);
+
+        beanUI1.GetComponent<ThoughtTween>().UIAppear();
+
+        yield return new WaitForSecondsRealtime(3);
+
+        beanUI1.GetComponent<ThoughtTween>().UIDisappear();
+        sproutUI2.GetComponent<ThoughtTween>().UIDisappear();
 
         fader.GetComponent<HMDFader>().FadeOut(2);
     }

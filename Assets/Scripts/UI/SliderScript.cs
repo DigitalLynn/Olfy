@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
+/*
 public class SliderScript : MonoBehaviour
 {
     [SerializeField] 
@@ -14,7 +14,7 @@ public class SliderScript : MonoBehaviour
 
     // Calling from relevant script in scripts folder
     [SerializeField]
-    private Channel2 olfy;
+    //private Channel2 olfy;
 
     public string units;
     private int newValue = 0;
@@ -43,3 +43,4 @@ public class SliderScript : MonoBehaviour
         });
     }
 }
+*/
