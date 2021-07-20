@@ -33,12 +33,12 @@ public class MoveBean : MonoBehaviour
 
         investigate2Pos = investigate2.transform.position;
         investigate1Pos = investigate1.transform.position;
-        housePos = house.transform.position;
+        
         grassPos = grassBean.transform.position;
 
         investigate2Rot = investigate2.transform.rotation;
         investigate1Rot = investigate1.transform.rotation;
-        houseRot = house.transform.rotation;
+        
         grassRot = grassBean.transform.rotation;
     }
 
@@ -49,6 +49,9 @@ public class MoveBean : MonoBehaviour
     // Move bean from their current location
     public void BeanToHouse(float durationPos, float durationRot)
     {
+        housePos = house.transform.position;
+        houseRot = house.transform.rotation;
+
         transform.DOMove(housePos, durationPos);
         transform.DORotateQuaternion(houseRot, durationRot);
     }
