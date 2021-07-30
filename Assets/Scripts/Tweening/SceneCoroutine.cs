@@ -119,8 +119,7 @@ public class SceneCoroutine : MonoBehaviour
 
         // Bean goes to the third tuft of grass with Sprout hiding behind it
         bean.GetComponent<MoveBean>().BeanToSprout(3, 1);
-        grassIn1.GetComponent<GrassPassOnScript>().GrassUp();
-        grassSprout.GetComponent<GrassPassOnScript>().GrassDown();
+        
 
         // Olfy triggers the GRASS smell
         olfy.GetComponent<Channel1>().ActiveSmell(80, 2000, 1);
@@ -130,7 +129,12 @@ public class SceneCoroutine : MonoBehaviour
         //
 
 
-        yield return new WaitForSecondsRealtime(4);
+        yield return new WaitForSecondsRealtime(3);
+
+        grassIn1.GetComponent<GrassPassOnScript>().GrassUp();
+        grassSprout.GetComponent<GrassPassOnScript>().GrassDown();
+
+        yield return new WaitForSecondsRealtime(1);
 
         beanUI2.GetComponent<ThoughtTween>().UIAppear();
 
