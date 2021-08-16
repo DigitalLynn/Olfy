@@ -83,7 +83,7 @@ public class SceneCoroutine : MonoBehaviour
         yield return new WaitForSecondsRealtime(4);
 
         // Play sound for stomach growl
-        FindObjectOfType<AudioManager>().Play("Thought");
+        //FindObjectOfType<AudioManager>().Play("Thought");
         beanUI1.GetComponent<ThoughtTween>().ChangeImage();
 
         yield return new WaitForSecondsRealtime(4);
