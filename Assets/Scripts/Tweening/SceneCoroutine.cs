@@ -12,6 +12,7 @@ public class SceneCoroutine : MonoBehaviour
     public GameObject sproutUI2;
 
     public GameObject VRRig;
+    private Vector3 VRRigStartPos;
 
     public GameObject fader;
     public GameObject olfy;
@@ -29,6 +30,8 @@ public class SceneCoroutine : MonoBehaviour
     public void Start()
     {
         StartCoroutine(Begin());
+        VRRigStartPos = VRRig.transform.position;
+        fader.GetComponent<HMDFader>().FadeOut(0);
     }
 
     /// <summary>
@@ -130,6 +133,9 @@ public class SceneCoroutine : MonoBehaviour
 
 
         yield return new WaitForSecondsRealtime(3);
+
+        FindObjectOfType<AudioManager>().Play("Stomach");
+        Debug.Log("surprise");
 
         grassIn1.GetComponent<GrassPassOnScript>().GrassUp();
         grassSprout.GetComponent<GrassPassOnScript>().GrassDown();
@@ -269,5 +275,9 @@ public class SceneCoroutine : MonoBehaviour
         yield return new WaitForSecondsRealtime(3);
 
         fader.GetComponent<HMDFader>().FadeOut(2);
+
+        VRRig.transform.position = VRRigStartPos;
+
+        fader.GetComponent<HMDFader>().FadeIn(2);
     }
 }
