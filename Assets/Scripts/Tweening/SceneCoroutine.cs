@@ -10,6 +10,7 @@ public class SceneCoroutine : MonoBehaviour
     public GameObject beanUI2;
     public GameObject sproutUI1;
     public GameObject sproutUI2;
+    public GameObject startUI;
 
     public GameObject VRRig;
     private Vector3 VRRigStartPos;
@@ -27,11 +28,19 @@ public class SceneCoroutine : MonoBehaviour
     public GameObject homePosBean;
     public GameObject homePosSprout;
 
+    public GameObject credits;
+    public GameObject title;
+
+    public GameObject RHand;
+    public GameObject rayCaster;
+
     public void Start()
     {
         StartCoroutine(Begin());
         VRRigStartPos = VRRig.transform.position;
         fader.GetComponent<HMDFader>().FadeOut(0);
+        RHand.SetActive(false);
+        rayCaster.SetActive(false);
     }
 
     /// <summary>
@@ -50,33 +59,41 @@ public class SceneCoroutine : MonoBehaviour
 
         fader.GetComponent<HMDFader>().FadeIn(2);
 
+        olfy.GetComponent<Channel1>().ActiveSmell(100, 3000, 2);
+
         yield return new WaitForSecondsRealtime(17);
 
         fader.GetComponent<HMDFader>().FadeOut(2);
 
         yield return new WaitForSecondsRealtime(2);
 
-
         yield return new WaitForSecondsRealtime(1);
 
         VRRig.transform.position = new Vector3(0, 0, 0);
-        Debug.Log("Teleport");
 
         //
         // ACT 1
         //
 
-        fader.GetComponent<HMDFader>().FadeIn(2);
+        title.transform.localPosition = new Vector3(0, -10000, 0);
+
+        credits.transform.localPosition = new Vector3(0, 0, 0);
 
         // Olfy triggers the GRASS smell
         // Intensity, duration, channel
-        olfy.GetComponent<Channel1>().ActiveSmell(60, 2000, 1);
+        olfy.GetComponent<Channel1>().ActiveSmell(100, 3000, 1);
+
+        fader.GetComponent<HMDFader>().FadeIn(2);
 
         // Bean is waiting out the front of her house
         yield return new WaitForSecondsRealtime(6);
         // 28" here
         FindObjectOfType<AudioManager>().Play("Thought");
         beanUI1.GetComponent<ThoughtTween>().UIAppear();
+
+        // Berry smell after Berry UI appears
+        olfy.GetComponent<Channel1>().ActiveSmell(100, 3000, 2);
+
         yield return new WaitForSecondsRealtime(4);
 
         // Play sound for thought bubble
@@ -100,8 +117,8 @@ public class SceneCoroutine : MonoBehaviour
         bean.GetComponent<MoveBean>().BeanToInvest2(2, 1);
         grassIn2.GetComponent<GrassPassOnScript>().GrassDown();
 
-        // Olfy triggers the BERRY smell
-        olfy.GetComponent<Channel1>().ActiveSmell(60, 2000, 3);
+        // Olfy triggers the Disappointment smell
+        olfy.GetComponent<Channel1>().ActiveSmell(60, 3000, 3);
 
         yield return new WaitForSecondsRealtime(5);
 
@@ -113,7 +130,7 @@ public class SceneCoroutine : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Disapointment");
 
         // Olfy triggers the DISAPPOINTMENT smell
-        olfy.GetComponent<Channel1>().ActiveSmell(60, 2000, 2);
+        olfy.GetComponent<Channel1>().ActiveSmell(60, 3000, 2);
 
         beanUI1.GetComponent<ThoughtTween>().ChangeImage();
         
@@ -125,7 +142,7 @@ public class SceneCoroutine : MonoBehaviour
         
 
         // Olfy triggers the GRASS smell
-        olfy.GetComponent<Channel1>().ActiveSmell(80, 2000, 1);
+        olfy.GetComponent<Channel1>().ActiveSmell(100, 3000, 1);
 
         //
         // ACT 2
@@ -162,11 +179,16 @@ public class SceneCoroutine : MonoBehaviour
 
         sproutUI1.GetComponent<ThoughtTween>().ChangeImage();
 
+        startUI.GetComponent<ThoughtTween>().ChangeImage();
+
         FindObjectOfType<AudioManager>().Play("Thought");
 
         yield return new WaitForSecondsRealtime(2);
 
         beanUI2.GetComponent<ThoughtTween>().ChangeImage();
+
+        // Smell of Joy
+        olfy.GetComponent<Channel1>().ActiveSmell(100, 3000, 2);
 
         FindObjectOfType<AudioManager>().Play("Giggle2");
 
@@ -193,8 +215,8 @@ public class SceneCoroutine : MonoBehaviour
         // This is where I will animate their meeting and telling of the food
         //
 
-        // Olfy triggers the BERRY smell
-        olfy.GetComponent<Channel1>().ActiveSmell(80, 2000, 3);
+        // Olfy triggers the Disappointment smell
+        olfy.GetComponent<Channel1>().ActiveSmell(80, 3000, 3);
 
         // Bean and Sprout goes to the second tuft of grass with Sprout
         bean.GetComponent<MoveBean>().BeanToInvest1(4, 1);
@@ -204,7 +226,7 @@ public class SceneCoroutine : MonoBehaviour
 
         sprout.GetComponent<MoveSprout>().SproutToInvest1(3, 1);
 
-        olfy.GetComponent<Channel1>().ActiveSmell(80, 2000, 2);
+        olfy.GetComponent<Channel1>().ActiveSmell(80, 3000, 2);
 
         yield return new WaitForSecondsRealtime(6);
 
@@ -246,7 +268,7 @@ public class SceneCoroutine : MonoBehaviour
         beanUI1.GetComponent<ThoughtTween>().UIDisappear();
         sproutUI2.GetComponent<ThoughtTween>().UIAppear();
 
-        olfy.GetComponent<Channel1>().ActiveSmell(100, 2000, 3);
+        olfy.GetComponent<Channel1>().ActiveSmell(100, 3000, 3);
 
         FindObjectOfType<AudioManager>().Play("Thought");
 
@@ -263,21 +285,29 @@ public class SceneCoroutine : MonoBehaviour
 
         FindObjectOfType<AudioManager>().Play("Giggle2");
 
-        olfy.GetComponent<Channel1>().ActiveSmell(100, 2000, 1);
+        olfy.GetComponent<Channel1>().ActiveSmell(100, 3000, 2);
 
         yield return new WaitForSecondsRealtime(3);
 
         beanUI1.GetComponent<ThoughtTween>().UIDisappear();
         sproutUI2.GetComponent<ThoughtTween>().UIDisappear();
 
-        
+        yield return new WaitForSecondsRealtime(1);
 
-        yield return new WaitForSecondsRealtime(3);
+        olfy.GetComponent<Channel1>().ActiveSmell(100, 3000, 2);
 
         fader.GetComponent<HMDFader>().FadeOut(2);
 
+        yield return new WaitForSecondsRealtime(2);
+
         VRRig.transform.position = VRRigStartPos;
 
+
         fader.GetComponent<HMDFader>().FadeIn(2);
+
+        yield return new WaitForSecondsRealtime(2);
+
+        RHand.SetActive(true);
+        rayCaster.SetActive(true);
     }
 }
